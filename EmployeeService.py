@@ -76,5 +76,11 @@ def deleteEmp(empId):
     else:
         return jsonify({'response':'Failure'})
 
+@app.route('/empdb/employee/<empId>/<empTit>',methods=['PUT'])
+def updateEmpTit(empId,empTit):
+    em = [ emp for emp in empDB if (emp['id'] == empId) ]
+    em[0]['title'] = empTit
+    return jsonify(em)    
+
 if __name__ == '__main__':
  app.run(host='0.0.0.0', port=5000)
