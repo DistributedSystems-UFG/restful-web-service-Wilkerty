@@ -81,6 +81,16 @@ def updateEmpTit(empId,empTit):
     em = [ emp for emp in empDB if (emp['id'] == empId) ]
     em[0]['title'] = empTit
     return jsonify(em)    
+ 
+@app.route('/empdb/employee/averageSalary', methods=['GET'])
+def getAverageSalary():
+    average = 0
+    count = 0
+    for emp in empDB:
+        average += emp['salary']
+        count +=1
+    average = average/count 
+    return jsonify({"Average Salary: ": average})
 
 if __name__ == '__main__':
  app.run(host='0.0.0.0', port=5000)
